@@ -5,7 +5,6 @@ body {
     overflow: hidden;
 }
 
-/* --- Loading Page --- */
 .loading-container {
     height: 100vh;
     width: 100%;
@@ -45,25 +44,23 @@ body {
     transform: scale(1.1);
 }
 
-/* --- Main Content --- */
 .main-content {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    display: flex;               /* keep flex layout */
+    display: flex;               
     justify-content: center;
     align-items: center;
     background-color: black;
     z-index: 5;
-    transform: scale(0);         /* start hidden */
-    opacity: 0;                  /* invisible */
-    pointer-events: none;        /* no clicks until active */
+    transform: scale(0);         
+    opacity: 0;                  
+    pointer-events: none;        
     /* transition: transform 1s ease-in-out, opacity 1s ease-in-out; */
 }
 
-/* When active → visible */
 .main-content.active {
     transform: scale(1);
     opacity: 1;
@@ -92,7 +89,6 @@ body {
     to { transform: scale(1); }
 } 
 
-/* --- Hand Buttons --- */
 .hand-button {
     position: absolute;
     width: 100px;
@@ -104,12 +100,10 @@ body {
     transition: opacity 0.5s ease;
 }
 
-/* Buttons only appear when active */
 .main-content.active .hand-button {
     opacity: 1;
 }
 
-/* Adjust button positions based on your specific image */
 .hand-1 { top: 32%; left: 32%; }
 .hand-2 { top: 32%; right: 32%; }
 .hand-3 { bottom: 30%; left: 36%; }
