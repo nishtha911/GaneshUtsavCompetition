@@ -1,110 +1,444 @@
-body {
+* {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: black;
-    overflow: hidden;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.loading-container {
+body {
+    font-family: 'Times New Roman', serif;
+    overflow: hidden;
     height: 100vh;
+    background: #000;
+}
+
+.info-text {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    color: #0b4c8a;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    z-index: 1002;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 8px 12px;
+    border-radius: 6px;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(11, 76, 138, 0.3);
+}
+
+.app-container {
+    position: relative;
     width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: #000;
+}
+
+.hidden-checkbox {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-image: url("./images/ganesh-clipart.png");
-    background-size: cover;
-    background-position: center;
+    background-repeat: no-repeat;
+    background-position: center 80%;
+    background-size: 250%;
+    transition: all 2s cubic-bezier(0.23, 1, 0.32, 1);
+    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.8));
+    z-index: 1;
+    background-color: transparent;
+}
+
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
-    transform: translateY(-350px) scale(2);
-    transition: transform 1s ease-in-out;
+    z-index: 1000;
+    transition: opacity 1.5s ease-out;
+    background: transparent;
 }
 
 .loading-text {
-    font-family: "Playwrite HU", sans-serif;
-    font-size: 2em;
-    color: #ce772a;
-    -webkit-text-stroke: 0.01px #241100;
-    margin-bottom: 20px;
-    animation: pulse 1.5s infinite;
+    font-family: "Playwrite HU", cursive;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    color: #0b4c8a;
+    text-shadow: 
+        2px 2px 0 #fff, 
+        -2px -2px 0 #fff, 
+        2px -2px 0 #fff, 
+        -2px 2px 0 #fff,
+        0 0 10px rgba(255, 255, 255, 0.7);
+    margin-bottom: 2rem;
+    animation: pulse 2s infinite ease-in-out;
+    z-index: 1001;
+    text-align: center;
+    padding: 15px;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(11, 76, 138, 0.4);
 }
 
-
-.bappa-feet {
-    width: 200px;
-    height: 100px;
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 50%;
+.feet-area {
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%) translateY(150px);
+    width: 40%;
+    height: 70%;
+    background: transparent;
     cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
     transition: transform 0.3s ease;
-    margin-bottom: 60px;
+    /* border: 2px dashed rgba(11, 76, 138, 0.5);  */
+    border-radius: 12px;
 }
 
-.bappa-feet:hover {
-    transform: scale(1.1);
+
+#entry-trigger:checked ~ .background-image {
+    background-position: center center;
+    background-size: 80%;
+    animation: breathe 8s infinite ease-in-out 2s;
 }
 
-.main-content {
+#entry-trigger:checked ~ .loading-overlay {
+    opacity: 0;
+    pointer-events: none;
+    transition-delay: 0.5s;
+}
+
+#entry-trigger:checked ~ .main-overlay {
+    display: block;
+    animation: fadeIn 1s ease-in 1s both;
+}
+
+#entry-trigger:checked ~ .instruction-text {
+    display: block;
+    animation: fadeIn 1s ease-in 1.5s both;
+}
+
+#entry-trigger:checked ~ .footer {
+    display: block;
+    animation: fadeIn 1s ease-in 2s both;
+}
+
+#entry-trigger:checked ~ .main-overlay .hand-button {
+    animation: fadeInScale 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+#entry-trigger:checked ~ .main-overlay .hand-1 { animation-delay: 1.2s; }
+#entry-trigger:checked ~ .main-overlay .hand-2 { animation-delay: 1.4s; }
+#entry-trigger:checked ~ .main-overlay .hand-3 { animation-delay: 1.6s; }
+#entry-trigger:checked ~ .main-overlay .hand-4 { animation-delay: 1.8s; }
+
+.main-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: none;
+    z-index: 50;
+}
+
+.hand-button {
+    position: absolute;
+    width: clamp(70px, 10vw, 110px);
+    height: clamp(70px, 10vw, 110px);
+    background: transparent;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 100;
+    text-decoration: none;
+    border-radius: 50%;
+}
+
+.hand-button:hover {
+    transform: scale(1.2);
+    background: rgba(11, 76, 138, 0.2);
+}
+
+.hand-button:focus {
+    outline: 3px solid #0b4c8a;
+    outline-offset: 5px;
+}
+
+.hand-1 {
+    top: 48%;
+    left: 40%;
+}
+
+.hand-2 {
+    top: 50%;
+    right: 38%;
+}
+
+.hand-3 {
+    top: 35%;
+    left: 39%;
+}
+
+.hand-4 {
+    top: 35%;
+    right: 38%;
+}
+
+.instruction-text {
+    position: absolute;
+    top: 10%;
+    right: 5%;
+    display: none;
+    color: #0b4c8a;
+    font-size: 1.2rem;
+    z-index: 60;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px 15px;
+    border-radius: 8px;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(11, 76, 138, 0.3);
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: #0b4c8a;
+    padding: 12px;
+    font-size: 1rem;
+    z-index: 100;
+    display: none;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
+}
+
+.info-modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    display: flex;               
-    justify-content: center;
-    align-items: center;
-    background-color: black;
-    z-index: 5;
-    transform: scale(0);         
-    opacity: 0;                  
-    pointer-events: none;        
-    /* transition: transform 1s ease-in-out, opacity 1s ease-in-out; */
-}
-
-.main-content.active {
-    transform: scale(1);
-    opacity: 1;
-    pointer-events: auto;
-}
-
-.ganpati-container {
-    position: relative;
-    width: 100%;
-    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.ganpati-image {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    animation: zoomIn 1.5s forwards;
-    pointer-events: none;
-}
-
- @keyframes zoomIn {
-    from { transform: scale(0.1); }
-    to { transform: scale(1); }
-} 
-
-.hand-button {
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    background-color: rgba(0, 0, 0, 0.297);
-    border-radius: 50%;
-    cursor: pointer;
+    z-index: 2000;
     opacity: 0;
-    transition: opacity 0.5s ease;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-.main-content.active .hand-button {
+.info-modal:target {
     opacity: 1;
+    visibility: visible;
 }
 
-.hand-1 { top: 32%; left: 32%; }
-.hand-2 { top: 32%; right: 32%; }
-.hand-3 { bottom: 30%; left: 36%; }
-.hand-4 { bottom: 25%; right: 32%; }
+.info-content {
+    background: linear-gradient(135deg, #0a3b6b, #0b4c8a);
+    border-radius: 15px;
+    padding: 2rem;
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    border: 2px solid #0b4c8a;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+    transform: scale(0.8);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.info-modal:target .info-content {
+    transform: scale(1);
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.8rem;
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    background: #0b4c8a;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.close-btn:hover {
+    color: #0b4c8a;
+    background: #fff;
+    transform: rotate(90deg);
+}
+
+.info-body h3 {
+    color: #fff;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.info-body p {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        text-shadow: 
+            2px 2px 0 #fff, 
+            -2px -2px 0 #fff, 
+            2px -2px 0 #fff, 
+            -2px 2px 0 #fff,
+            0 0 10px rgba(255, 255, 255, 0.7);
+    }
+    50% {
+        transform: scale(1.05);
+        text-shadow: 
+            2px 2px 0 #fff, 
+            -2px -2px 0 #fff, 
+            2px -2px 0 #fff, 
+            -2px 2px 0 #fff,
+            0 0 15px rgba(255, 255, 255, 0.9);
+    }
+}
+
+@keyframes fadeInScale {
+    0% { opacity: 0; transform: scale(0.5); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes breathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.01); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@media (max-width: 768px) {
+    .info-text {
+        font-size: 12px;
+        top: 10px;
+        left: 10px;
+        padding: 6px 10px;
+    }
+    
+    .loading-text {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        padding: 12px;
+    }
+    
+    .feet-area {
+        width: 50%;
+        height: 18%;
+    }
+    
+    .hand-button {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .hand-1 { top: 25%; left: 22%; }
+    .hand-2 { top: 25%; right: 22%; }
+    .hand-3 { bottom: 38%; left: 25%; }
+    .hand-4 { bottom: 32%; right: 20%; }
+    
+    .info-content {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+    
+    .instruction-text {
+        font-size: 1rem;
+        top: 5%;
+        right: 50%;
+        transform: translateX(50%);
+        text-align: center;
+        width: 80%;
+    }
+    
+    .footer {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .info-text {
+        font-size: 10px;
+        top: 8px;
+        left: 8px;
+        padding: 5px 8px;
+    }
+    
+    .loading-text {
+        font-size: 1.5rem;
+        margin-bottom: 1.2rem;
+    }
+    
+    .feet-area {
+        width: 60%;
+        height: 15%;
+    }
+    
+    .hand-button {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .hand-1 { top: 24%; left: 18%; }
+    .hand-2 { top: 24%; right: 18%; }
+    .hand-3 { bottom: 40%; left: 22%; }
+    .hand-4 { bottom: 34%; right: 16%; }
+    
+    .info-content {
+        padding: 1.2rem;
+        margin: 0.8rem;
+    }
+    
+    .instruction-text {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+        width: 85%;
+    }
+    
+    .close-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 1.5rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

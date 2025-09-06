@@ -6,29 +6,82 @@
     <title>Ganpati Bappa Morya</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Playwrite+HU:wght@100..400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+HU:wght@100..400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="loading-container" id="loadingPage">
-        <h1 class="loading-text">Touch Bappa's feet to enter</h1>
-        <div class="bappa-feet" id="bappaFeet"></div>
-    </div>
+    <div class="app-container">
+        <input type="checkbox" id="entry-trigger" class="hidden-checkbox">
+        
+        <div class="background-image"></div>
+        <div class="loading-overlay">
+            <h6 class="info-text">Use desktop for better experience<br> or<br> rotate your mobile screen</h6>
 
-    <div class="main-content" id="mainContent">
-        <div class="ganpati-container">
-            <img src="./images/ganesh-clipart.png" alt="Ganpati Bappa" class="ganpati-image">
-            
-            <a href="https://en.wikipedia.org/wiki/Ankusha" class="hand-button hand-1" target="_blank"></a>
-            
-            <a href="https://en.wikipedia.org/wiki/Noose" class="hand-button hand-2" target="_blank"></a>
+            <h1 class="loading-text">Touch Bappa's feet to enter</h1>
+            <label for="entry-trigger" class="feet-area"></label>
+        </div>
 
-            <a href="https://en.wikipedia.org/wiki/Ganesha" class="hand-button hand-3" target="_blank"></a>
+        <div class="main-overlay">
+            <!-- Interactive buttons placed near hands and feet -->
+            <a href="#ankusha" class="hand-button hand-1"></a>
+            <a href="#pasha" class="hand-button hand-2"></a>
+            <a href="#blessing" class="hand-button hand-3"></a>
+            <a href="#modak" class="hand-button hand-4"></a>
+        </div>
 
-            <a href="https://en.wikipedia.org/wiki/Modak" class="hand-button hand-4" target="_blank"></a>
+        <div class="instruction-text">
+            <p>Tap on Bappa's hands to learn more</p>
+        </div>
+
+        <footer class="footer">
+            <p>With devotion to Lord Ganesha &copy Nishtha Pardesi</p>
+        </footer>
+
+        <!-- Modal windows for information -->
+        <div id="ankusha" class="info-modal">
+            <div class="info-content">
+                <a href="#" class="close-btn">&times;</a>
+                <div class="info-body">
+                    <h3>Abhaya Mudra (Blessing Hand)</h3>
+                    <p>The raised hand in Abhaya Mudra represents fearlessness and divine protection. This gesture assures devotees that Ganesha is always there 
+                        to protect and bless them. It signifies 'fear not' and grants courage and peace.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="pasha" class="info-modal">
+            <div class="info-content">
+                <a href="#" class="close-btn">&times;</a>
+                <div class="info-body">
+                    <h3>Modak (Sweet Delight)</h3>
+                    <p>Modak is Lord Ganesha's favorite sweet and represents the sweetness of life and spiritual bliss. Made with jaggery and coconut, 
+                        it symbolizes the rewards of spiritual practice and brings joy and prosperity 
+                        </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="blessing" class="info-modal">
+            <div class="info-content">
+                <a href="#" class="close-btn">&times;</a>
+                <div class="info-body">
+                    <h3>Ankusha (Elephant Goad)</h3>
+                    <p>The ankusha represents Lord Ganesha's power to remove obstacles and guide devotees on the right path. Just as a mahout uses an 
+                        ankusha to guide an elephant, Ganesha uses this tool to steer us away from difficulties and towards righteousness.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="modak" class="info-modal">
+            <div class="info-content">
+                <a href="#" class="close-btn">&times;</a>
+                <div class="info-body">
+                    <h3>Pasha (Divine Noose)</h3>
+                    <p>The pasha or noose represents Ganesha's power to bind and control negative forces. It symbolizes the capture of difficulties 
+                        and the binding of evil. This divine rope helps devotees control desires and ego.</p>
+                </div>
+            </div>
         </div>
     </div>
-
-    <script src="script.js"></script>
 </body>
 </html>
